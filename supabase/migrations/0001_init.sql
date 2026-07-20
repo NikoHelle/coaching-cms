@@ -1,6 +1,6 @@
 create table drills (
   id uuid primary key default gen_random_uuid(),
-  slug text not null unique,
+  slug text not null unique check (slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'),
   title text not null,
   description text not null default '',
   purpose text not null default '',
@@ -20,7 +20,7 @@ create index drills_tags_idx on drills using gin (tags);
 
 create table sessions (
   id uuid primary key default gen_random_uuid(),
-  slug text not null unique,
+  slug text not null unique check (slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'),
   title text not null,
   session_date date,
   notes text not null default '',
@@ -37,12 +37,15 @@ create table session_drills (
   primary key (session_id, drill_id)
 );
 
-create or replace function set_updated_at() returns trigger as $$
+create or replace function set_updated_at() returns trigger
+language plpgsql
+set search_path = ''
+as $$
 begin
   new.updated_at = now();
   return new;
 end;
-$$ language plpgsql;
+$$;
 
 create trigger drills_updated_at before update on drills
   for each row execute function set_updated_at();
