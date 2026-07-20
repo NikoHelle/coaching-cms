@@ -110,3 +110,4 @@ $$;
 
 -- The RPC is only for the signed-in coach; keep it off the anon PostgREST surface.
 revoke execute on function replace_session_drills(uuid, jsonb) from public, anon;
+grant execute on function replace_session_drills(uuid, jsonb) to authenticated;
