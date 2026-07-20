@@ -1,8 +1,9 @@
+import type { Metadata } from 'next'
 import { getPublicDrills } from '@/lib/queries'
 import { DrillCard } from '@/components/drill-card'
 import Link from 'next/link'
 
-export const metadata = { title: 'Drill library' }
+export const metadata: Metadata = { title: 'Drill library' }
 
 export default async function DrillsPage({
   searchParams,

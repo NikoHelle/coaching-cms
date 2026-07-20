@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import { createClient } from '@/lib/supabase/server'
 import type { Drill, Session, SessionWithDrills } from '@/lib/types'
 
@@ -35,7 +36,7 @@ export async function getPublicDrills(tag?: string): Promise<Drill[]> {
   return data
 }
 
-export async function getPublicDrillBySlug(slug: string): Promise<Drill | null> {
+export const getPublicDrillBySlug = cache(async (slug: string): Promise<Drill | null> => {
   const supabase = await createClient()
   const { data, error } = await supabase
     .from('drills')
@@ -45,9 +46,9 @@ export async function getPublicDrillBySlug(slug: string): Promise<Drill | null> 
     .maybeSingle()
   if (error) throw error
   return data
-}
+})
 
-export async function getPublicSessionBySlug(slug: string): Promise<SessionWithDrills | null> {
+export const getPublicSessionBySlug = cache(async (slug: string): Promise<SessionWithDrills | null> => {
   const supabase = await createClient()
   const { data, error } = await supabase
     .from('sessions')
@@ -57,7 +58,7 @@ export async function getPublicSessionBySlug(slug: string): Promise<SessionWithD
     .maybeSingle()
   if (error) throw error
   return data ? toSessionWithDrills(data as unknown as SessionRow) : null
-}
+})
 
 export async function getAllDrills(): Promise<Drill[]> {
   const supabase = await createClient()
