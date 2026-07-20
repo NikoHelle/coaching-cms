@@ -7,8 +7,18 @@ export function DrillDetail({ drill }: { drill: Drill }) {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm text-neutral-600">
-        {drill.player_count && <span>👥 {drill.player_count} players</span>}
-        {drill.duration_minutes > 0 && <span>⏱ {drill.duration_minutes} min</span>}
+        {drill.player_count && (
+          <span>
+            <span aria-hidden="true">👥 </span>
+            {drill.player_count} players
+          </span>
+        )}
+        {drill.duration_minutes > 0 && (
+          <span>
+            <span aria-hidden="true">⏱ </span>
+            {drill.duration_minutes} min
+          </span>
+        )}
       </div>
 
       {drill.purpose && (

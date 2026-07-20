@@ -12,8 +12,19 @@ export function DrillCard({ drill }: { drill: Drill }) {
         <p className="mt-1 line-clamp-2 text-sm text-neutral-600">{drill.purpose}</p>
       )}
       <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-neutral-500">
-        {drill.player_count && <span>👥 {drill.player_count}</span>}
-        {drill.duration_minutes > 0 && <span>⏱ {drill.duration_minutes} min</span>}
+        {drill.player_count && (
+          <span>
+            <span aria-hidden="true">👥 </span>
+            {drill.player_count}
+            <span className="sr-only"> players</span>
+          </span>
+        )}
+        {drill.duration_minutes > 0 && (
+          <span>
+            <span aria-hidden="true">⏱ </span>
+            {drill.duration_minutes} min
+          </span>
+        )}
         {drill.tags.map((tag) => (
           <span key={tag} className="text-emerald-700">
             #{tag}
