@@ -12,7 +12,7 @@ export const drillSchema = z.object({
   focus_points: z.array(z.string().min(1)).default([]),
   dos: z.array(z.string().min(1)).default([]),
   donts: z.array(z.string().min(1)).default([]),
-  video_urls: z.array(z.string().url()).default([]),
+  video_urls: z.array(z.url()).default([]),
   tags: z.array(z.string().min(1)).default([]),
   status: z.enum(['public', 'draft']).default('draft'),
 })
@@ -30,7 +30,7 @@ export const sessionSchema = z.object({
   notes: z.string().default(''),
   status: z.enum(['public', 'draft']).default('draft'),
   drills: z
-    .array(z.object({ drill_id: z.string().uuid(), note: z.string().default('') }))
+    .array(z.object({ drill_id: z.uuid(), note: z.string().default('') }))
     .default([]),
 })
 
