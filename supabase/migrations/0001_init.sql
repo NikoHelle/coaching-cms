@@ -87,3 +87,23 @@ create policy "auth full sessions" on sessions for all to authenticated
   using (true) with check (true);
 create policy "auth full session_drills" on session_drills for all to authenticated
   using (true) with check (true);
+
+-- Replaces a session's drill list atomically: a function body runs in one
+-- transaction, so a failed insert rolls back the delete.
+create or replace function replace_session_drills(p_session_id uuid, p_items jsonb)
+returns void
+language plpgsql
+set search_path = ''
+as $$
+begin
+  delete from public.session_drills where session_id = p_session_id;
+
+  insert into public.session_drills (session_id, drill_id, position, note)
+  select
+    p_session_id,
+    (item->>'drill_id')::uuid,
+    (row_number() over ())::int,
+    nullif(item->>'note', '')
+  from jsonb_array_elements(p_items) as item;
+end;
+$$;

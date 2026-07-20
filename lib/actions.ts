@@ -44,6 +44,7 @@ export async function saveSession(
   const supabase = await createClient()
 
   let sessionId = id
+  const created = !id
   if (id) {
     const { error } = await supabase.from('sessions').update(sessionData).eq('id', id)
     if (error) return { error: error.message }
@@ -57,21 +58,15 @@ export async function saveSession(
     sessionId = data.id
   }
 
-  const { error: clearError } = await supabase
-    .from('session_drills')
-    .delete()
-    .eq('session_id', sessionId!)
-  if (clearError) return { error: clearError.message }
-
-  if (drills.length > 0) {
-    const rows = drills.map((item, index) => ({
-      session_id: sessionId!,
-      drill_id: item.drill_id,
-      position: index + 1,
-      note: item.note || null,
-    }))
-    const { error: insertError } = await supabase.from('session_drills').insert(rows)
-    if (insertError) return { error: insertError.message }
+  const { error: drillsError } = await supabase.rpc('replace_session_drills', {
+    p_session_id: sessionId!,
+    p_items: drills,
+  })
+  if (drillsError) {
+    if (created) {
+      await supabase.from('sessions').delete().eq('id', sessionId!)
+    }
+    return { error: drillsError.message }
   }
 
   revalidatePath('/', 'layout')
