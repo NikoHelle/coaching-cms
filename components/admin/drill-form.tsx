@@ -55,7 +55,7 @@ export function DrillForm({ drill }: { drill: Drill | null }) {
     setForm((prev) => ({ ...prev, [key]: value }))
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) {
     e.preventDefault()
     setPending(true)
     const payload = {

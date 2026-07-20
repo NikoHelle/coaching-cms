@@ -1,9 +1,10 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Toaster } from '@/components/ui/sonner'
 import { logout } from '@/lib/auth-actions'
 import { Button } from '@/components/ui/button'
 
-export const metadata = { title: 'Admin' }
+export const metadata: Metadata = { title: 'Admin' }
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
