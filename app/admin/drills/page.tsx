@@ -3,6 +3,7 @@ import { getAllDrills } from '@/lib/queries'
 import { deleteDrill } from '@/lib/actions'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { ConfirmSubmitButton } from '@/components/admin/confirm-submit-button'
 
 export default async function AdminDrillsPage() {
   const drills = await getAllDrills()
@@ -28,9 +29,11 @@ export default async function AdminDrillsPage() {
                 await deleteDrill(drill.id)
               }}
             >
-              <Button type="submit" variant="ghost" size="sm">
+              <ConfirmSubmitButton
+                message={`Delete drill "${drill.title}"? It will also be removed from any sessions.`}
+              >
                 Delete
-              </Button>
+              </ConfirmSubmitButton>
             </form>
           </li>
         ))}

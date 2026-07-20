@@ -107,3 +107,6 @@ begin
   from jsonb_array_elements(p_items) with ordinality as t(item, ord);
 end;
 $$;
+
+-- The RPC is only for the signed-in coach; keep it off the anon PostgREST surface.
+revoke execute on function replace_session_drills(uuid, jsonb) from public, anon;

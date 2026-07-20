@@ -62,10 +62,25 @@ export function DrillForm({ drill }: { drill: Drill | null }) {
       ...form,
       tags: tagsText.split(',').map((t) => t.trim().toLowerCase()).filter(Boolean),
     }
-    const result = await saveDrill(drill?.id ?? null, payload)
-    if (result?.error) {
-      setError(result.error)
-      toast.error(result.error)
+    try {
+      const result = await saveDrill(drill?.id ?? null, payload)
+      if (result?.error) {
+        setError(result.error)
+        toast.error(result.error)
+        setPending(false)
+      }
+    } catch (err) {
+      if (
+        err &&
+        typeof err === 'object' &&
+        'digest' in err &&
+        String((err as { digest?: string }).digest).startsWith('NEXT_REDIRECT')
+      ) {
+        throw err
+      }
+      const message = 'Save failed — check your connection and try again.'
+      setError(message)
+      toast.error(message)
       setPending(false)
     }
   }

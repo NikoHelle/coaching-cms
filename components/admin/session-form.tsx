@@ -65,10 +65,25 @@ export function SessionForm({
       status,
       drills: items,
     }
-    const result = await saveSession(session?.id ?? null, payload)
-    if (result?.error) {
-      setError(result.error)
-      toast.error(result.error)
+    try {
+      const result = await saveSession(session?.id ?? null, payload)
+      if (result?.error) {
+        setError(result.error)
+        toast.error(result.error)
+        setPending(false)
+      }
+    } catch (err) {
+      if (
+        err &&
+        typeof err === 'object' &&
+        'digest' in err &&
+        String((err as { digest?: string }).digest).startsWith('NEXT_REDIRECT')
+      ) {
+        throw err
+      }
+      const message = 'Save failed — check your connection and try again.'
+      setError(message)
+      toast.error(message)
       setPending(false)
     }
   }

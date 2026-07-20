@@ -3,6 +3,7 @@ import { getAllSessions } from '@/lib/queries'
 import { deleteSession } from '@/lib/actions'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { ConfirmSubmitButton } from '@/components/admin/confirm-submit-button'
 
 export default async function AdminSessionsPage() {
   const sessions = await getAllSessions()
@@ -34,9 +35,11 @@ export default async function AdminSessionsPage() {
                 await deleteSession(session.id)
               }}
             >
-              <Button type="submit" variant="ghost" size="sm">
+              <ConfirmSubmitButton
+                message={`Delete session "${session.title}"? Its drills are kept.`}
+              >
                 Delete
-              </Button>
+              </ConfirmSubmitButton>
             </form>
           </li>
         ))}
