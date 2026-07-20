@@ -102,8 +102,8 @@ begin
   select
     p_session_id,
     (item->>'drill_id')::uuid,
-    (row_number() over ())::int,
+    (row_number() over (order by ord))::int,
     nullif(item->>'note', '')
-  from jsonb_array_elements(p_items) as item;
+  from jsonb_array_elements(p_items) with ordinality as t(item, ord);
 end;
 $$;
