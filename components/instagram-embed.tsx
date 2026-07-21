@@ -1,5 +1,6 @@
 'use client'
 
+import { LoaderCircle, LoaderPinwheel } from 'lucide-react'
 import { useEffect } from 'react'
 
 declare global {
@@ -26,23 +27,16 @@ export function InstagramEmbed({ url }: { url: string }) {
 
   return (
     <blockquote
-      className="instagram-media"
       data-instgrm-permalink={url}
       data-instgrm-version="14"
-      style={{
-        background: '#fff',
-        border: 0,
-        borderRadius: '0.75rem',
-        boxShadow: '0 0 1px 0 rgba(0,0,0,0.5), 0 1px 10px 0 rgba(0,0,0,0.15)',
-        margin: '1px auto',
-        maxWidth: 540,
-        minWidth: 326,
-        padding: 0,
-        width: 'calc(100% - 2px)',
-      }}
+      className="instagram-media bg-white border border-neutral-200 rounded-xl"
     >
-      <div style={{ padding: 16 }}>
-        <a href={url} target="_blank" rel="noopener noreferrer">
+      <div className="p-4 text-xs flex flex-col gap-2">
+        <div className="flex items-center gap-2">
+          <LoaderCircle className="size-4 animate-spin" />
+          <span className="text-neutral-500">Ladataan videota...</span>
+        </div>
+        <a href={url} target="_blank" rel="noopener noreferrer" className="underline self-end">
           Katso Instagramissa
         </a>
       </div>

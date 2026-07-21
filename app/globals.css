@@ -129,3 +129,10 @@
     @apply font-sans;
   }
 }
+
+.drill-section {
+  @apply py-4 flex flex-col gap-4 border-b border-neutral-200;
+  p {
+    @apply text-sm font-medium;
+  }
+}
