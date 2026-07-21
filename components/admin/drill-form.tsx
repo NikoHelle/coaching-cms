@@ -188,10 +188,11 @@ export function DrillForm({ drill }: { drill: Drill | null }) {
         onDraftChange={(v) => setListDraft("Don'ts", v)}
       />
       <ListFieldEditor
-        label="Video URLs (YouTube / Instagram)"
+        label="Video URLs (YouTube / Instagram) — order defines Variaatio 1, 2, …"
         values={form.video_urls}
         onChange={(v) => set('video_urls', v)}
         placeholder="https://…"
+        numbered
         draft={listDrafts['Video URLs'] ?? ''}
         onDraftChange={(v) => setListDraft('Video URLs', v)}
       />

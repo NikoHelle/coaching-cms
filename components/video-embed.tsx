@@ -1,8 +1,9 @@
 import { parseVideoUrl } from '@/lib/video'
 import { InstagramEmbed } from '@/components/instagram-embed'
 
-export function VideoEmbed({ url }: { url: string }) {
+export function VideoEmbed({ url, variant }: { url: string; variant?: number }) {
   const info = parseVideoUrl(url)
+  const title = variant ? `Variaatio ${variant}: ${url}` : `Harjoitevideo: ${url}`
 
   if (info.kind === 'youtube') {
     return (
@@ -12,7 +13,7 @@ export function VideoEmbed({ url }: { url: string }) {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         loading="lazy"
-        title={`Harjoitevideo: ${url}`}
+        title={title}
       />
     )
   }
