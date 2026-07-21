@@ -17,9 +17,17 @@ export default async function AdminDrillsPage() {
       <ul className="mt-4 flex flex-col divide-y">
         {drills.map((drill) => (
           <li key={drill.id} className="flex items-center gap-3 py-2 text-sm">
-            <Link href={`/admin/drills/${drill.id}`} className="flex-1 font-medium hover:underline">
-              {drill.title}
-            </Link>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-baseline gap-x-2">
+                <Link href={`/admin/drills/${drill.id}`} className="font-medium hover:underline">
+                  {drill.title}
+                </Link>
+                <span className="font-mono text-xs text-neutral-400">/{drill.slug}</span>
+              </div>
+              {drill.description && (
+                <p className="truncate text-xs text-neutral-500">{drill.description}</p>
+              )}
+            </div>
             <Badge variant={drill.status === 'public' ? 'default' : 'secondary'}>
               {drill.status}
             </Badge>
