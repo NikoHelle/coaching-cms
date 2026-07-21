@@ -1,7 +1,10 @@
+import type { Metadata } from 'next'
 import { getPublicSessions } from '@/lib/queries'
 import { SessionList } from '@/components/session-list'
 
-export default async function HomePage() {
+export const metadata: Metadata = { title: 'Treenit' }
+
+export default async function SessionsPage() {
   const sessions = await getPublicSessions()
 
   return (
