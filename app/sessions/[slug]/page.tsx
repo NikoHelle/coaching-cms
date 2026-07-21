@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import ReactMarkdown from 'react-markdown'
 import { getPublicSessionBySlug } from '@/lib/queries'
 import { DrillDetail } from '@/components/drill-detail'
+import { formatSessionDate } from '@/lib/format-date'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -34,16 +35,16 @@ export default async function SessionPage({ params }: Props) {
         {session.session_date && (
           <span>
             <span aria-hidden="true">📅 </span>
-            {session.session_date}
+            {formatSessionDate(session.session_date)}
           </span>
         )}
         {totalMinutes > 0 && (
           <span>
             <span aria-hidden="true">⏱ </span>
-            {totalMinutes} min total
+            yhteensä {totalMinutes} min
           </span>
         )}
-        <span>{session.items.length} drills</span>
+        <span>{session.items.length} harjoitetta</span>
       </div>
 
       {session.notes && (

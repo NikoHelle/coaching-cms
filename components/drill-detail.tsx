@@ -10,7 +10,7 @@ export function DrillDetail({ drill }: { drill: Drill }) {
         {drill.player_count && (
           <span>
             <span aria-hidden="true">👥 </span>
-            {drill.player_count} players
+            {drill.player_count} pelaajaa
           </span>
         )}
         {drill.duration_minutes > 0 && (
@@ -34,7 +34,7 @@ export function DrillDetail({ drill }: { drill: Drill }) {
       {drill.focus_points.length > 0 && (
         <section>
           <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500">
-            Focus points
+            Painopisteet
           </h3>
           <ul className="list-disc space-y-1 pl-5 text-sm">
             {drill.focus_points.map((point) => (
@@ -48,7 +48,7 @@ export function DrillDetail({ drill }: { drill: Drill }) {
         <div className="grid gap-4 sm:grid-cols-2">
           {drill.dos.length > 0 && (
             <section className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
-              <h3 className="mb-2 text-sm font-semibold text-emerald-800">Do</h3>
+              <h3 className="mb-2 text-sm font-semibold text-emerald-800">Tee näin</h3>
               <ul className="list-disc space-y-1 pl-5 text-sm text-emerald-900">
                 {drill.dos.map((item) => (
                   <li key={item}>{item}</li>
@@ -58,7 +58,7 @@ export function DrillDetail({ drill }: { drill: Drill }) {
           )}
           {drill.donts.length > 0 && (
             <section className="rounded-xl border border-red-200 bg-red-50 p-4">
-              <h3 className="mb-2 text-sm font-semibold text-red-800">Don&apos;t</h3>
+              <h3 className="mb-2 text-sm font-semibold text-red-800">Vältä näitä</h3>
               <ul className="list-disc space-y-1 pl-5 text-sm text-red-900">
                 {drill.donts.map((item) => (
                   <li key={item}>{item}</li>

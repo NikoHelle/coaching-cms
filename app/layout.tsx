@@ -14,22 +14,22 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: { default: 'Coaching CMS', template: '%s | Coaching CMS' },
-  description: 'Football drills and training sessions',
+  title: { default: 'Valmennus', template: '%s | Valmennus' },
+  description: 'Jalkapalloharjoitteet ja treenit',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="fi" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="min-h-screen bg-white text-neutral-900 antialiased">
         <header className="border-b">
           <nav className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
             <Link href="/" className="font-bold">
               <span aria-hidden="true">⚽ </span>
-              Coaching
+              Valmennus
             </Link>
             <Link href="/drills" className="text-sm text-neutral-600 hover:text-neutral-900">
-              Drill library
+              Harjoitepankki
             </Link>
           </nav>
         </header>

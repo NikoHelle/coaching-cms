@@ -6,10 +6,10 @@ export default function NotFound() {
       <p className="text-5xl" aria-hidden="true">
         ⚽
       </p>
-      <h1 className="text-2xl font-bold">That one went over the bar</h1>
-      <p className="text-neutral-600">This page doesn&apos;t exist or isn&apos;t public.</p>
+      <h1 className="text-2xl font-bold">Se meni ohi maalin</h1>
+      <p className="text-neutral-600">Tätä sivua ei ole olemassa tai se ei ole julkinen.</p>
       <Link href="/" className="underline">
-        Back to sessions
+        Takaisin treeneihin
       </Link>
     </main>
   )
