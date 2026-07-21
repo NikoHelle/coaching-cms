@@ -8,8 +8,12 @@ export function DrillCard({ drill }: { drill: Drill }) {
       className="block rounded-2xl border p-5 transition-shadow hover:shadow-md"
     >
       <h2 className="text-lg font-semibold">{drill.title}</h2>
+      <p className="mt-0.5 font-mono text-xs text-neutral-400">/{drill.slug}</p>
       {drill.purpose && (
         <p className="mt-1 line-clamp-2 text-sm text-neutral-600">{drill.purpose}</p>
+      )}
+      {drill.description && (
+        <p className="mt-1 line-clamp-3 text-sm text-neutral-500">{drill.description}</p>
       )}
       <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-neutral-500">
         {drill.player_count && (

@@ -10,13 +10,21 @@ export function ListFieldEditor({
   values,
   onChange,
   placeholder,
+  draft: controlledDraft,
+  onDraftChange,
 }: {
   label: string
   values: string[]
   onChange: (values: string[]) => void
   placeholder?: string
+  /** Provide both draft and onDraftChange to control the pending-input text
+      from the parent (e.g. to warn about unadded text on save). */
+  draft?: string
+  onDraftChange?: (value: string) => void
 }) {
-  const [draft, setDraft] = useState('')
+  const [internalDraft, setInternalDraft] = useState('')
+  const draft = controlledDraft ?? internalDraft
+  const setDraft = onDraftChange ?? setInternalDraft
 
   function add() {
     const value = draft.trim()
