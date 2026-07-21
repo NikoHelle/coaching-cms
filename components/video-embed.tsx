@@ -1,4 +1,5 @@
 import { parseVideoUrl } from '@/lib/video'
+import { InstagramEmbed } from '@/components/instagram-embed'
 
 export function VideoEmbed({ url }: { url: string }) {
   const info = parseVideoUrl(url)
@@ -17,14 +18,7 @@ export function VideoEmbed({ url }: { url: string }) {
   }
 
   if (info.kind === 'instagram') {
-    return (
-      <iframe
-        src={info.embedUrl}
-        className="mx-auto aspect-[9/16] w-full max-w-sm rounded-xl border-0"
-        loading="lazy"
-        title={`Harjoitevideo: ${url}`}
-      />
-    )
+    return <InstagramEmbed url={url} />
   }
 
   return (
