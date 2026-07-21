@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Manrope, Geist_Mono } from 'next/font/google'
 import Link from 'next/link'
 import './globals.css'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
+const manrope = Manrope({
+  variable: '--font-manrope',
+  subsets: ['latin', 'latin-ext'],
 })
 
 const geistMono = Geist_Mono({
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fi" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="fi" className={`${manrope.variable} ${geistMono.variable}`}>
       <body className="min-h-screen bg-white text-neutral-900 antialiased">
         <header className="border-b">
           <nav className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">

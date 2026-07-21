@@ -39,11 +39,9 @@ export function SessionForm({
 
   const matches = useMemo(() => {
     const q = search.trim().toLowerCase()
-    if (!q) return []
     return allDrills
-      .filter((d) => d.title.toLowerCase().includes(q))
       .filter((d) => !items.some((i) => i.drill_id === d.id))
-      .slice(0, 8)
+      .filter((d) => !q || d.title.toLowerCase().includes(q))
   }, [search, allDrills, items])
 
   function move(index: number, delta: number) {
