@@ -50,13 +50,29 @@ export function DrillForm({ drill }: { drill: Drill | null }) {
   const [slugTouched, setSlugTouched] = useState(Boolean(drill))
   const [pending, setPending] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [listDrafts, setListDrafts] = useState<Record<string, string>>({})
 
   function set<K extends keyof DrillInput>(key: K, value: DrillInput[K]) {
     setForm((prev) => ({ ...prev, [key]: value }))
   }
 
+  function setListDraft(field: string, value: string) {
+    setListDrafts((prev) => ({ ...prev, [field]: value }))
+  }
+
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) {
     e.preventDefault()
+
+    const pendingFields = Object.entries(listDrafts)
+      .filter(([, value]) => value.trim())
+      .map(([field]) => field)
+    if (pendingFields.length > 0) {
+      const message = `Unadded text in: ${pendingFields.join(', ')}. Click "Add" to include it, or clear the field, then save again.`
+      setError(message)
+      toast.error(message)
+      return
+    }
+
     setPending(true)
     const payload = {
       ...form,
@@ -154,14 +170,30 @@ export function DrillForm({ drill }: { drill: Drill | null }) {
         label="Focus points"
         values={form.focus_points}
         onChange={(v) => set('focus_points', v)}
+        draft={listDrafts['Focus points'] ?? ''}
+        onDraftChange={(v) => setListDraft('Focus points', v)}
       />
-      <ListFieldEditor label="Dos" values={form.dos} onChange={(v) => set('dos', v)} />
-      <ListFieldEditor label="Don'ts" values={form.donts} onChange={(v) => set('donts', v)} />
+      <ListFieldEditor
+        label="Dos"
+        values={form.dos}
+        onChange={(v) => set('dos', v)}
+        draft={listDrafts['Dos'] ?? ''}
+        onDraftChange={(v) => setListDraft('Dos', v)}
+      />
+      <ListFieldEditor
+        label="Don'ts"
+        values={form.donts}
+        onChange={(v) => set('donts', v)}
+        draft={listDrafts["Don'ts"] ?? ''}
+        onDraftChange={(v) => setListDraft("Don'ts", v)}
+      />
       <ListFieldEditor
         label="Video URLs (YouTube / Instagram)"
         values={form.video_urls}
         onChange={(v) => set('video_urls', v)}
         placeholder="https://…"
+        draft={listDrafts['Video URLs'] ?? ''}
+        onDraftChange={(v) => setListDraft('Video URLs', v)}
       />
 
       <div className="flex flex-col gap-2">
