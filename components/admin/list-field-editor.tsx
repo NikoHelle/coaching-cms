@@ -10,6 +10,7 @@ export function ListFieldEditor({
   values,
   onChange,
   placeholder,
+  numbered = false,
   draft: controlledDraft,
   onDraftChange,
 }: {
@@ -17,6 +18,8 @@ export function ListFieldEditor({
   values: string[]
   onChange: (values: string[]) => void
   placeholder?: string
+  /** Show a 1-based position number on each row (e.g. video variants). */
+  numbered?: boolean
   /** Provide both draft and onDraftChange to control the pending-input text
       from the parent (e.g. to warn about unadded text on save). */
   draft?: string
@@ -47,6 +50,7 @@ export function ListFieldEditor({
       <ul className="flex flex-col gap-1">
         {values.map((value, index) => (
           <li key={`${value}-${index}`} className="flex items-center gap-1 text-sm">
+            {numbered && <span className="w-5 shrink-0 font-bold">{index + 1}.</span>}
             <span className="flex-1 rounded border bg-neutral-50 px-2 py-1">{value}</span>
             <Button type="button" variant="ghost" size="sm" onClick={() => move(index, -1)}>
               ↑

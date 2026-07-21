@@ -70,9 +70,20 @@ export function DrillDetail({ drill }: { drill: Drill }) {
       )}
 
       {drill.video_urls.length > 0 && (
-        <section className="flex flex-col gap-4">
-          {drill.video_urls.map((url) => (
-            <VideoEmbed key={url} url={url} />
+        <section className="flex flex-col gap-6">
+          {drill.video_urls.map((url, index) => (
+            <div key={`${index}-${url}`} className="flex flex-col gap-2">
+              <h3 className="flex items-center gap-2 text-sm font-semibold">
+                <span
+                  aria-hidden="true"
+                  className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-neutral-900 text-xs font-bold text-white"
+                >
+                  {index + 1}
+                </span>
+                Variaatio {index + 1}
+              </h3>
+              <VideoEmbed url={url} variant={index + 1} />
+            </div>
           ))}
         </section>
       )}
