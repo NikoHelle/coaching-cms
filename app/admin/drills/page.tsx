@@ -16,21 +16,30 @@ export default async function AdminDrillsPage() {
       </div>
       <ul className="mt-4 flex flex-col divide-y">
         {drills.map((drill) => (
-          <li key={drill.id} className="flex items-center gap-3 py-2 text-sm">
+          <li key={drill.id} className="flex items-center gap-4 py-4 text-sm">
             <div className="min-w-0 flex-1">
-              <div className="flex flex-wrap items-baseline gap-x-2">
-                <Link href={`/admin/drills/${drill.id}`} className="font-medium hover:underline">
-                  {drill.title}
-                </Link>
-                <span className="font-mono text-xs text-neutral-400">/{drill.slug}</span>
+              <div className="min-w-0 flex flex-col gap-2">
+                <div className="flex flex-wrap items-baseline gap-x-2">
+                  <Link href={`/admin/drills/${drill.id}`} className="font-medium hover:underline">
+                    {drill.title}
+                  </Link>
+                </div>
+                {drill.description && (
+                  <p className="truncate text-xs text-neutral-500 line-clamp-1">{drill.description}</p>
+                )}
+                <div className="flex flex-wrap gap-2 text-xs">
+                  {drill.tags.map((tag) => (
+                    <Badge key={tag} variant="tag">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
               </div>
-              {drill.description && (
-                <p className="truncate text-xs text-neutral-500">{drill.description}</p>
-              )}
             </div>
             <Badge variant={drill.status === 'public' ? 'default' : 'secondary'}>
               {drill.status}
             </Badge>
+
             <form
               action={async () => {
                 'use server'

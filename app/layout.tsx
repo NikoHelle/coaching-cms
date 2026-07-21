@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <nav className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
             <Link href="/" className="font-bold">
               <span aria-hidden="true">⚽ </span>
-              Valmennus
+              HJK United 2026-2027
             </Link>
             <Link href="/drills" className="text-sm text-neutral-600 hover:text-neutral-900">
               Harjoitepankki

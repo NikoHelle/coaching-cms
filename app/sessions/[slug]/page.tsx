@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown'
 import { getPublicSessionBySlug } from '@/lib/queries'
 import { DrillDetail } from '@/components/drill-detail'
 import { formatSessionDate } from '@/lib/format-date'
+import { Heading2, Heading3 } from '@/components/ui/headings'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -31,10 +32,9 @@ export default async function SessionPage({ params }: Props) {
   return (
     <main className="mx-auto max-w-3xl px-4 py-8">
       <h1 className="text-3xl font-bold">{session.title}</h1>
-      <div className="mt-2 flex flex-wrap gap-x-6 gap-y-1 text-sm text-neutral-600">
+      <div className="border-b border-neutral-200 pb-2 mt-2 flex flex-wrap gap-x-6 gap-y-1 text-sm text-neutral-600">
         {session.session_date && (
           <span>
-            <span aria-hidden="true">📅 </span>
             {formatSessionDate(session.session_date)}
           </span>
         )}
@@ -48,11 +48,12 @@ export default async function SessionPage({ params }: Props) {
       </div>
 
       {session.notes && (
-        <div className="prose prose-sm mt-6 max-w-none rounded-xl bg-neutral-100 p-4">
+        <section className="drill-section mt-4">
+          <Heading2>Treenit tarkeimmät asiat</Heading2>
           <ReactMarkdown>{session.notes}</ReactMarkdown>
-        </div>
+        </section>
       )}
-
+      <Heading2 className="mt-4">Harjoitteet</Heading2>
       <ol className="mt-8 flex flex-col gap-8">
         {session.items.map((item, index) => (
           <li key={item.drill.id} className="rounded-2xl border p-5">
@@ -63,10 +64,10 @@ export default async function SessionPage({ params }: Props) {
               <h2 className="text-xl font-bold">{item.drill.title}</h2>
             </div>
             {item.note && (
-              <p className="mb-4 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm font-medium text-amber-900">
-                <span aria-hidden="true">📝 </span>
-                {item.note}
-              </p>
+              <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm font-medium text-amber-900">
+                <Heading3>Huomautus tähän treeniin</Heading3>
+                <p>{item.note}</p>
+              </div>
             )}
             <DrillDetail drill={item.drill} />
           </li>

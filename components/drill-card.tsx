@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Drill } from '@/lib/types'
+import { Badge } from './ui/badge'
 
 export function DrillCard({ drill }: { drill: Drill }) {
   return (
@@ -30,9 +31,9 @@ export function DrillCard({ drill }: { drill: Drill }) {
           </span>
         )}
         {drill.tags.map((tag) => (
-          <span key={tag} className="text-emerald-700">
-            #{tag}
-          </span>
+          <Badge key={tag} variant="tag">
+            {tag}
+          </Badge>
         ))}
       </div>
     </Link>
