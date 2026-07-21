@@ -16,7 +16,7 @@ export function DrillCard({ drill }: { drill: Drill }) {
           <span>
             <span aria-hidden="true">👥 </span>
             {drill.player_count}
-            <span className="sr-only"> players</span>
+            <span className="sr-only"> pelaajaa</span>
           </span>
         )}
         {drill.duration_minutes > 0 && (

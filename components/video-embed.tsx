@@ -11,7 +11,7 @@ export function VideoEmbed({ url }: { url: string }) {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         loading="lazy"
-        title={`Drill video: ${url}`}
+        title={`Harjoitevideo: ${url}`}
       />
     )
   }
@@ -22,7 +22,7 @@ export function VideoEmbed({ url }: { url: string }) {
         src={info.embedUrl}
         className="mx-auto aspect-[9/16] w-full max-w-sm rounded-xl border-0"
         loading="lazy"
-        title={`Drill video: ${url}`}
+        title={`Harjoitevideo: ${url}`}
       />
     )
   }
@@ -34,7 +34,7 @@ export function VideoEmbed({ url }: { url: string }) {
       rel="noopener noreferrer"
       className="block rounded-xl border p-4 text-sm text-emerald-700 underline"
     >
-      Watch video: {url}
+      Katso video: {url}
     </a>
   )
 }

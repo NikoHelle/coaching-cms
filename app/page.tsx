@@ -1,14 +1,15 @@
 import Link from 'next/link'
 import { getPublicSessions } from '@/lib/queries'
+import { formatSessionDate } from '@/lib/format-date'
 
 export default async function HomePage() {
   const sessions = await getPublicSessions()
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-8">
-      <h1 className="text-2xl font-bold">Training sessions</h1>
+      <h1 className="text-2xl font-bold">Treenit</h1>
       {sessions.length === 0 ? (
-        <p className="mt-6 text-neutral-600">No sessions published yet.</p>
+        <p className="mt-6 text-neutral-600">Treenejä ei ole vielä julkaistu.</p>
       ) : (
         <ul className="mt-6 flex flex-col gap-3">
           {sessions.map((session) => (
@@ -19,7 +20,9 @@ export default async function HomePage() {
               >
                 <span className="font-semibold">{session.title}</span>
                 {session.session_date && (
-                  <span className="text-sm text-neutral-500">{session.session_date}</span>
+                  <span className="text-sm text-neutral-500">
+                    {formatSessionDate(session.session_date)}
+                  </span>
                 )}
               </Link>
             </li>
