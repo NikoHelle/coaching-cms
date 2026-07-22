@@ -10,7 +10,7 @@ export function Heading2({ className, children }: { className?: string; children
 
 export function Heading3({ className, children }: { className?: string; children: React.ReactNode }) {
   return (
-    <h3 className={cn('text-xs font-bold uppercase tracking-widest text-pitch-deep', className)}>
+    <h3 className={cn('text-xs font-bold uppercase tracking-widest text-team-deep', className)}>
       {children}
     </h3>
   )

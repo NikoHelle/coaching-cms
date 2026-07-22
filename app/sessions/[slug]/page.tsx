@@ -33,27 +33,27 @@ export default async function SessionPage({ params }: Props) {
     <main className="mx-auto max-w-3xl px-4 py-8">
       <header className="rise-in">
         {session.session_date && (
-          <p className="text-sm font-bold uppercase tracking-wide text-pitch">
+          <p className="text-sm font-bold uppercase tracking-wide text-team">
             {formatSessionDate(session.session_date)}
           </p>
         )}
         <h1 className="mt-1 font-display text-4xl text-ink sm:text-5xl">{session.title}</h1>
-        <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1 border-b-2 border-pitch-line pb-4 text-sm text-ink-soft">
+        <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1 border-b-2 border-team-line pb-4 text-sm text-ink-soft">
           {totalMinutes > 0 && (
             <span>
               <span aria-hidden="true">⏱ </span>
-              yhteensä <span className="font-bold text-pitch-deep">{totalMinutes} min</span>
+              yhteensä <span className="font-bold text-team-deep">{totalMinutes} min</span>
             </span>
           )}
           <span>
-            <span className="font-bold text-pitch-deep">{session.items.length}</span> harjoitetta
+            <span className="font-bold text-team-deep">{session.items.length}</span> harjoitetta
           </span>
         </div>
       </header>
 
       {session.notes && (
         <section
-          className="rise-in mt-6 flex flex-col gap-2 rounded-2xl border-2 border-pitch-line bg-pitch-tint p-4"
+          className="rise-in mt-6 flex flex-col gap-2 rounded-2xl border-2 border-team-line bg-team-tint p-4"
           style={{ '--stagger': 1 } as React.CSSProperties}
         >
           <Heading2 className="text-xl">Treenit tarkeimmät asiat</Heading2>
@@ -68,13 +68,13 @@ export default async function SessionPage({ params }: Props) {
         {session.items.map((item, index) => (
           <li
             key={item.drill.id}
-            className="rise-in rounded-2xl border-2 border-pitch-line bg-chalk p-5"
+            className="rise-in rounded-2xl border-2 border-team-line bg-chalk p-5 shadow-card"
             style={{ '--stagger': index + 2 } as React.CSSProperties}
           >
             <div className="mb-4 flex items-center gap-4">
               <span
                 aria-hidden="true"
-                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-pitch font-display text-2xl text-white"
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-team font-display text-2xl text-white"
               >
                 {index + 1}
               </span>

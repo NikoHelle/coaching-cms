@@ -5,24 +5,26 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Sunday League palette — grass, cones, chalk. OKLCH; chroma eases toward
-   the light end so tints stay natural in sunlight. */
+/* Sunday League palette — team blue, cones, chalk. OKLCH; muted chroma,
+   easing further toward the light end so tints stay calm in sunlight. */
 @theme {
-  --color-paper: oklch(0.98 0.008 130);
-  --color-chalk: oklch(0.995 0.004 130);
-  --color-ink: oklch(0.25 0.025 145);
-  --color-ink-soft: oklch(0.45 0.02 145);
-  --color-ink-faint: oklch(0.58 0.015 145);
-  --color-pitch: oklch(0.48 0.11 150);
-  --color-pitch-deep: oklch(0.34 0.08 150);
-  --color-pitch-tint: oklch(0.95 0.028 150);
-  --color-pitch-line: oklch(0.88 0.035 150);
-  --color-cone: oklch(0.67 0.16 45);
-  --color-cone-ink: oklch(0.44 0.12 45);
-  --color-cone-tint: oklch(0.955 0.03 60);
-  --color-clay: oklch(0.5 0.13 25);
-  --color-clay-tint: oklch(0.95 0.025 25);
+  --color-paper: oklch(0.978 0.004 250);
+  --color-chalk: oklch(0.993 0.002 250);
+  --color-ink: oklch(0.25 0.02 255);
+  --color-ink-soft: oklch(0.44 0.016 255);
+  --color-ink-faint: oklch(0.57 0.012 255);
+  --color-team: oklch(0.45 0.09 255);
+  --color-team-deep: oklch(0.33 0.07 255);
+  --color-team-tint: oklch(0.945 0.016 250);
+  --color-team-line: oklch(0.885 0.02 250);
+  --color-cone: oklch(0.65 0.13 45);
+  --color-cone-ink: oklch(0.44 0.1 45);
+  --color-cone-tint: oklch(0.955 0.02 60);
+  --color-clay: oklch(0.48 0.1 25);
+  --color-clay-tint: oklch(0.95 0.016 25);
   --font-display: var(--font-lilita);
+  --shadow-card: 0 1px 2px oklch(0.3 0.03 255 / 0.05), 0 3px 10px oklch(0.3 0.03 255 / 0.07);
+  --shadow-lift: 0 2px 4px oklch(0.3 0.03 255 / 0.07), 0 10px 24px oklch(0.3 0.03 255 / 0.11);
 }
 
 @keyframes rise {
@@ -173,7 +175,7 @@
 }
 
 .drill-section {
-  @apply py-4 flex flex-col gap-3 border-b-2 border-dashed border-pitch-line last:border-b-0;
+  @apply py-4 flex flex-col gap-3 border-b-2 border-dashed border-team-line last:border-b-0;
   p {
     @apply text-sm font-medium text-ink;
   }

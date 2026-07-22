@@ -6,7 +6,7 @@ export function DrillCard({ drill, stagger = 0 }: { drill: Drill; stagger?: numb
   return (
     <Link
       href={`/drills/${drill.slug}`}
-      className="rise-in block rounded-2xl border-2 border-pitch-line bg-chalk p-5 transition-all hover:-translate-y-0.5 hover:border-pitch hover:shadow-md"
+      className="rise-in block rounded-2xl border-2 border-team-line bg-chalk p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-team hover:shadow-lift"
       style={{ '--stagger': stagger } as React.CSSProperties}
     >
       <h2 className="font-display text-xl text-ink">{drill.title}</h2>
