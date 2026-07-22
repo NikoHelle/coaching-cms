@@ -1,6 +1,6 @@
 'use client'
 
-import { LoaderCircle, LoaderPinwheel } from 'lucide-react'
+import { LoaderCircle } from 'lucide-react'
 import { useEffect } from 'react'
 
 declare global {
