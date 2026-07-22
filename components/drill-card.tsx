@@ -2,21 +2,22 @@ import Link from 'next/link'
 import type { Drill } from '@/lib/types'
 import { Badge } from './ui/badge'
 
-export function DrillCard({ drill }: { drill: Drill }) {
+export function DrillCard({ drill, stagger = 0 }: { drill: Drill; stagger?: number }) {
   return (
     <Link
       href={`/drills/${drill.slug}`}
-      className="block rounded-2xl border p-5 transition-shadow hover:shadow-md"
+      className="rise-in block rounded-2xl border-2 border-pitch-line bg-chalk p-5 transition-all hover:-translate-y-0.5 hover:border-pitch hover:shadow-md"
+      style={{ '--stagger': stagger } as React.CSSProperties}
     >
-      <h2 className="text-lg font-semibold">{drill.title}</h2>
-      <p className="mt-0.5 font-mono text-xs text-neutral-400">/{drill.slug}</p>
+      <h2 className="font-display text-xl text-ink">{drill.title}</h2>
+      <p className="mt-0.5 font-mono text-xs text-ink-faint">/{drill.slug}</p>
       {drill.purpose && (
-        <p className="mt-1 line-clamp-2 text-sm text-neutral-600">{drill.purpose}</p>
+        <p className="mt-2 line-clamp-2 text-sm font-semibold text-ink-soft">{drill.purpose}</p>
       )}
       {drill.description && (
-        <p className="mt-1 line-clamp-3 text-sm text-neutral-500">{drill.description}</p>
+        <p className="mt-1 line-clamp-3 text-sm text-ink-faint">{drill.description}</p>
       )}
-      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-neutral-500">
+      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-ink-soft">
         {drill.player_count && (
           <span>
             <span aria-hidden="true">👥 </span>

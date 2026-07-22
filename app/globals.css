@@ -5,6 +5,48 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Sunday League palette — grass, cones, chalk. OKLCH; chroma eases toward
+   the light end so tints stay natural in sunlight. */
+@theme {
+  --color-paper: oklch(0.98 0.008 130);
+  --color-chalk: oklch(0.995 0.004 130);
+  --color-ink: oklch(0.25 0.025 145);
+  --color-ink-soft: oklch(0.45 0.02 145);
+  --color-ink-faint: oklch(0.58 0.015 145);
+  --color-pitch: oklch(0.48 0.11 150);
+  --color-pitch-deep: oklch(0.34 0.08 150);
+  --color-pitch-tint: oklch(0.95 0.028 150);
+  --color-pitch-line: oklch(0.88 0.035 150);
+  --color-cone: oklch(0.67 0.16 45);
+  --color-cone-ink: oklch(0.44 0.12 45);
+  --color-cone-tint: oklch(0.955 0.03 60);
+  --color-clay: oklch(0.5 0.13 25);
+  --color-clay-tint: oklch(0.95 0.025 25);
+  --font-display: var(--font-lilita);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise-in {
+  animation: rise 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(min(var(--stagger, 0), 6) * 70ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise-in {
+    animation: none;
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -131,8 +173,8 @@
 }
 
 .drill-section {
-  @apply py-4 flex flex-col gap-4 border-b border-neutral-200;
+  @apply py-4 flex flex-col gap-3 border-b-2 border-dashed border-pitch-line last:border-b-0;
   p {
-    @apply text-sm font-medium;
+    @apply text-sm font-medium text-ink;
   }
 }

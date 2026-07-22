@@ -26,8 +26,8 @@ export default async function DrillPage({ params }: Props) {
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-8">
-      <h1 className="text-3xl font-bold">{drill.title}</h1>
-      <div className="mt-6">
+      <h1 className="rise-in font-display text-4xl text-ink sm:text-5xl">{drill.title}</h1>
+      <div className="rise-in mt-6" style={{ '--stagger': 1 } as React.CSSProperties}>
         <DrillDetail drill={drill} />
       </div>
     </main>
