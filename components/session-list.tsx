@@ -39,13 +39,13 @@ export function SessionList({ sessions }: { sessions: Session[] }) {
           <li key={session.id} className="rise-in" style={{ '--stagger': index } as React.CSSProperties}>
             <Link
               href={`/sessions/${session.slug}`}
-              className={`flex items-center gap-4 rounded-2xl border-2 p-4 transition-shadow hover:shadow-md ${
-                isNext ? 'border-cone bg-cone-tint' : 'border-pitch-line bg-chalk'
+              className={`flex items-center gap-4 rounded-2xl border-2 p-4 shadow-card transition-shadow hover:shadow-lift ${
+                isNext ? 'border-cone bg-cone-tint' : 'border-team-line bg-chalk'
               }`}
             >
               <div
                 className={`flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-xl ${
-                  isNext ? 'bg-cone text-white' : 'bg-pitch-tint text-pitch-deep'
+                  isNext ? 'bg-cone text-white' : 'bg-team-tint text-team-deep'
                 }`}
               >
                 {date ? (

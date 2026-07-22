@@ -19,8 +19,8 @@ export default async function DrillsPage({
       <Heading1>Harjoitepankki</Heading1>
       {tag && (
         <p className="mt-2 text-sm text-ink-soft">
-          Suodatettu: <span className="font-bold text-pitch-deep">#{tag}</span>{' '}
-          <Link href="/drills" className="underline hover:text-pitch-deep">
+          Suodatettu: <span className="font-bold text-team-deep">#{tag}</span>{' '}
+          <Link href="/drills" className="underline hover:text-team-deep">
             Tyhjennä
           </Link>
         </p>

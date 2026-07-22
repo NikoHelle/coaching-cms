@@ -31,27 +31,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${manrope.variable} ${lilita.variable} ${geistMono.variable}`}
     >
       <body className="flex min-h-screen flex-col bg-paper text-ink antialiased">
-        <header className="border-b-2 border-pitch-line bg-chalk">
+        <header className="border-b-2 border-team-line bg-chalk">
           <nav className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
-            <Link href="/" className="font-display text-lg text-pitch-deep">
+            <Link href="/" className="font-display text-lg text-team-deep">
               <span aria-hidden="true">⚽ </span>
               HJK United 2026-2027
             </Link>
             <Link
               href="/drills"
-              className="text-sm font-semibold text-ink-soft transition-colors hover:text-pitch-deep"
+              className="text-sm font-semibold text-ink-soft transition-colors hover:text-team-deep"
             >
               Harjoitepankki
             </Link>
           </nav>
         </header>
         <div className="flex-1">{children}</div>
-        <footer className="mt-16 border-t-2 border-pitch-line py-8">
+        <footer className="mt-16 border-t-2 border-team-line py-8">
           <div className="mx-auto flex max-w-3xl items-center justify-center gap-3 px-4 text-xs text-ink-faint">
             <svg
               aria-hidden="true"
               viewBox="0 0 48 24"
-              className="h-6 w-12 text-pitch-line"
+              className="h-6 w-12 text-team-line"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"

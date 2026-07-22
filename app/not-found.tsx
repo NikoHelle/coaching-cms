@@ -6,7 +6,7 @@ export default function NotFound() {
       <svg
         aria-hidden="true"
         viewBox="0 0 200 110"
-        className="w-48 text-pitch-line"
+        className="w-48 text-team-line"
         fill="none"
         stroke="currentColor"
         strokeWidth="4"
@@ -24,7 +24,7 @@ export default function NotFound() {
       <p className="text-ink-soft">Tätä sivua ei ole olemassa tai se ei ole julkinen.</p>
       <Link
         href="/"
-        className="rounded-xl border-2 border-pitch bg-pitch px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-pitch-deep"
+        className="rounded-xl border-2 border-team bg-team px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-team-deep"
       >
         Takaisin treeneihin
       </Link>

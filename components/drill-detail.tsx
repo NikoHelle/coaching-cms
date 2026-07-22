@@ -50,7 +50,7 @@ export function DrillDetail({ drill }: { drill: Drill }) {
           <ul className="flex flex-col gap-1.5 text-sm font-medium text-ink">
             {drill.focus_points.map((point, index) => (
               <li key={`${index}-${point}`} className="flex items-start gap-2">
-                <span aria-hidden="true" className="mt-0.5 font-bold text-pitch">
+                <span aria-hidden="true" className="mt-0.5 font-bold text-team">
                   ✓
                 </span>
                 {point}
@@ -63,9 +63,9 @@ export function DrillDetail({ drill }: { drill: Drill }) {
       {(drill.dos.length > 0 || drill.donts.length > 0) && (
         <div className="grid gap-4 sm:grid-cols-2">
           {drill.dos.length > 0 && (
-            <section className="flex flex-col gap-2 rounded-2xl border-2 border-pitch-line bg-pitch-tint p-4">
+            <section className="flex flex-col gap-2 rounded-2xl border-2 border-team-line bg-team-tint p-4">
               <Heading3>Korosta näitä</Heading3>
-              <ul className="flex flex-col gap-1.5 text-sm font-medium text-pitch-deep">
+              <ul className="flex flex-col gap-1.5 text-sm font-medium text-team-deep">
                 {drill.dos.map((item, index) => (
                   <li key={`${index}-${item}`} className="flex items-start gap-2">
                     <span aria-hidden="true" className="mt-0.5 font-bold">
@@ -96,7 +96,7 @@ export function DrillDetail({ drill }: { drill: Drill }) {
       )}
 
       {drill.video_urls.length > 0 && (
-        <section className="flex flex-col gap-4 rounded-2xl border-2 border-pitch-line bg-chalk p-4">
+        <section className="flex flex-col gap-4 rounded-2xl border-2 border-team-line bg-chalk p-4">
           <Heading3>Esimerkkivideot</Heading3>
           {drill.video_urls.map((url, index) => (
             <div key={`${index}-${url}`} className="flex flex-col gap-2">
