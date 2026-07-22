@@ -2,10 +2,16 @@ import { cache } from 'react'
 import { createClient } from '@/lib/supabase/server'
 import type { Drill, Session, SessionWithDrills } from '@/lib/types'
 
-const SESSION_WITH_DRILLS_SELECT = '*, session_drills(position, note, drill:drills(*))'
+const SESSION_WITH_DRILLS_SELECT =
+  '*, session_drills(position, note, video_indexes, drill:drills(*))'
 
 type SessionRow = Session & {
-  session_drills: { position: number; note: string | null; drill: Drill }[]
+  session_drills: {
+    position: number
+    note: string | null
+    video_indexes: number[] | null
+    drill: Drill
+  }[]
 }
 
 function toSessionWithDrills(row: SessionRow): SessionWithDrills {

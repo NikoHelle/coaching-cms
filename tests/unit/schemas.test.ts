@@ -52,4 +52,36 @@ describe('sessionSchema', () => {
     const result = sessionSchema.parse({ title: 'X', slug: 'x', session_date: '2026-07-22' })
     expect(result.session_date).toBe('2026-07-22')
   })
+
+  it('defaults video_indexes to null (show all)', () => {
+    const result = sessionSchema.parse({
+      title: 'X',
+      slug: 'x',
+      drills: [{ drill_id: '2c1f4c9e-4b7a-4b0e-9f3e-1a2b3c4d5e6f', note: '' }],
+    })
+    expect(result.drills[0].video_indexes).toBeNull()
+  })
+
+  it('accepts explicit video_indexes and an empty list', () => {
+    const result = sessionSchema.parse({
+      title: 'X',
+      slug: 'x',
+      drills: [
+        { drill_id: '2c1f4c9e-4b7a-4b0e-9f3e-1a2b3c4d5e6f', note: '', video_indexes: [0, 2] },
+        { drill_id: '3c1f4c9e-4b7a-4b0e-9f3e-1a2b3c4d5e6f', note: '', video_indexes: [] },
+      ],
+    })
+    expect(result.drills[0].video_indexes).toEqual([0, 2])
+    expect(result.drills[1].video_indexes).toEqual([])
+  })
+
+  it('rejects negative video indexes', () => {
+    expect(
+      sessionSchema.safeParse({
+        title: 'X',
+        slug: 'x',
+        drills: [{ drill_id: '2c1f4c9e-4b7a-4b0e-9f3e-1a2b3c4d5e6f', video_indexes: [-1] }],
+      }).success
+    ).toBe(false)
+  })
 })

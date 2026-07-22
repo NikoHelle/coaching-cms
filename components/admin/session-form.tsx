@@ -12,8 +12,8 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
 
-type Item = { drill_id: string; note: string }
-type PickerDrill = Pick<Drill, 'id' | 'title' | 'duration_minutes' | 'status'>
+type Item = { drill_id: string; note: string; video_indexes: number[] | null }
+type PickerDrill = Pick<Drill, 'id' | 'title' | 'duration_minutes' | 'status' | 'video_urls'>
 
 export function SessionForm({
   session,
@@ -29,7 +29,11 @@ export function SessionForm({
   const [notes, setNotes] = useState(session?.notes ?? '')
   const [status, setStatus] = useState<SessionInput['status']>(session?.status ?? 'draft')
   const [items, setItems] = useState<Item[]>(
-    session?.items.map((i) => ({ drill_id: i.drill.id, note: i.note ?? '' })) ?? []
+    session?.items.map((i) => ({
+      drill_id: i.drill.id,
+      note: i.note ?? '',
+      video_indexes: i.video_indexes,
+    })) ?? []
   )
   const [search, setSearch] = useState('')
   const [pending, setPending] = useState(false)
@@ -50,6 +54,21 @@ export function SessionForm({
     const next = [...items]
     ;[next[index], next[target]] = [next[target], next[index]]
     setItems(next)
+  }
+
+  function toggleVideo(itemIndex: number, videoIndex: number, videoCount: number) {
+    setItems((prev) =>
+      prev.map((item, i) => {
+        if (i !== itemIndex) return item
+        const current = item.video_indexes ?? Array.from({ length: videoCount }, (_, v) => v)
+        const next = current.includes(videoIndex)
+          ? current.filter((v) => v !== videoIndex)
+          : [...current, videoIndex].sort((a, b) => a - b)
+        // All checked = no restriction, so videos added to the drill later
+        // show automatically.
+        return { ...item, video_indexes: next.length === videoCount ? null : next }
+      })
+    )
   }
 
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) {
@@ -176,6 +195,25 @@ export function SessionForm({
                     setItems(items.map((it, i) => (i === index ? { ...it, note: e.target.value } : it)))
                   }
                 />
+                {drill && drill.video_urls.length > 0 && (
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
+                    <span className="font-medium text-neutral-500">Videos shown:</span>
+                    {drill.video_urls.map((_, vi) => {
+                      const checked =
+                        item.video_indexes === null || item.video_indexes.includes(vi)
+                      return (
+                        <label key={vi} className="flex items-center gap-1">
+                          <input
+                            type="checkbox"
+                            checked={checked}
+                            onChange={() => toggleVideo(index, vi, drill.video_urls.length)}
+                          />
+                          Variaatio {vi + 1}
+                        </label>
+                      )
+                    })}
+                  </div>
+                )}
               </li>
             )
           })}
@@ -195,7 +233,7 @@ export function SessionForm({
                     type="button"
                     className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-neutral-100"
                     onClick={() => {
-                      setItems([...items, { drill_id: drill.id, note: '' }])
+                      setItems([...items, { drill_id: drill.id, note: '', video_indexes: null }])
                       setSearch('')
                     }}
                   >

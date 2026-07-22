@@ -4,7 +4,19 @@ import { TagChip } from '@/components/tag-chip'
 import { VideoEmbed } from '@/components/video-embed'
 import { Heading3, Heading4 } from './ui/headings'
 
-export function DrillDetail({ drill }: { drill: Drill }) {
+export function DrillDetail({
+  drill,
+  visibleVideos = null,
+}: {
+  drill: Drill
+  /** 0-based indexes of videos to show; null = all. Hidden variants keep
+      their numbers so session notes referencing "Variaatio N" stay true. */
+  visibleVideos?: number[] | null
+}) {
+  const videos = drill.video_urls
+    .map((url, index) => ({ url, index }))
+    .filter(({ index }) => visibleVideos === null || visibleVideos.includes(index))
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-ink-soft">
@@ -95,10 +107,10 @@ export function DrillDetail({ drill }: { drill: Drill }) {
         </div>
       )}
 
-      {drill.video_urls.length > 0 && (
+      {videos.length > 0 && (
         <section className="flex flex-col gap-4 rounded-2xl border-2 border-team-line bg-chalk p-4">
           <Heading3>Esimerkkivideot</Heading3>
-          {drill.video_urls.map((url, index) => (
+          {videos.map(({ url, index }) => (
             <div key={`${index}-${url}`} className="flex flex-col gap-2">
               <Heading4 className="flex items-center gap-2 text-sm">
                 <span

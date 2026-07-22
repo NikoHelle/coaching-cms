@@ -30,7 +30,14 @@ export const sessionSchema = z.object({
   notes: z.string().default(''),
   status: z.enum(['public', 'draft']).default('draft'),
   drills: z
-    .array(z.object({ drill_id: z.uuid(), note: z.string().default('') }))
+    .array(
+      z.object({
+        drill_id: z.uuid(),
+        note: z.string().default(''),
+        // 0-based indexes into the drill's video_urls; null = show all.
+        video_indexes: z.array(z.number().int().min(0)).nullable().default(null),
+      })
+    )
     .default([]),
 })
 
