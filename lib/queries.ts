@@ -3,13 +3,13 @@ import { createClient } from '@/lib/supabase/server'
 import type { Drill, Session, SessionWithDrills } from '@/lib/types'
 
 const SESSION_WITH_DRILLS_SELECT =
-  '*, session_drills(position, note, video_indexes, drill:drills(*))'
+  '*, session_drills(position, note, visible_videos, drill:drills(*))'
 
 type SessionRow = Session & {
   session_drills: {
     position: number
     note: string | null
-    video_indexes: number[] | null
+    visible_videos: string[] | null
     drill: Drill
   }[]
 }

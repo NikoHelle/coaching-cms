@@ -30,7 +30,7 @@ export type Session = {
 export type SessionDrillItem = {
   position: number
   note: string | null
-  video_indexes: number[] | null
+  visible_videos: string[] | null
   drill: Drill
 }
 

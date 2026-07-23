@@ -86,7 +86,7 @@ export default async function SessionPage({ params }: Props) {
                 <p>{item.note}</p>
               </div>
             )}
-            <DrillDetail drill={item.drill} visibleVideos={item.video_indexes} />
+            <DrillDetail drill={item.drill} visibleVideos={item.visible_videos} />
           </li>
         ))}
       </ol>

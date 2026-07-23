@@ -9,13 +9,13 @@ export function DrillDetail({
   visibleVideos = null,
 }: {
   drill: Drill
-  /** 0-based indexes of videos to show; null = all. Hidden variants keep
-      their numbers so session notes referencing "Variaatio N" stay true. */
-  visibleVideos?: number[] | null
+  /** URLs of the videos to show; null = all. Hidden variants keep their
+      numbers so session notes referencing "Variaatio N" stay true. */
+  visibleVideos?: string[] | null
 }) {
   const videos = drill.video_urls
     .map((url, index) => ({ url, index }))
-    .filter(({ index }) => visibleVideos === null || visibleVideos.includes(index))
+    .filter(({ url }) => visibleVideos === null || visibleVideos.includes(url))
 
   return (
     <div className="flex flex-col gap-6">

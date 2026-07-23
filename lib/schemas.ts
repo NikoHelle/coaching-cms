@@ -34,8 +34,9 @@ export const sessionSchema = z.object({
       z.object({
         drill_id: z.uuid(),
         note: z.string().default(''),
-        // 0-based indexes into the drill's video_urls; null = show all.
-        video_indexes: z.array(z.number().int().min(0)).nullable().default(null),
+        // URLs from the drill's video_urls to show in this session;
+        // null = show all (robust to drill video reordering/deletion).
+        visible_videos: z.array(z.url()).nullable().default(null),
       })
     )
     .default([]),
