@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Manrope, Lilita_One, Geist_Mono } from 'next/font/google'
+import { Manrope, Archivo_Black, Geist_Mono } from 'next/font/google'
 import Link from 'next/link'
 import './globals.css'
 
@@ -8,8 +8,8 @@ const manrope = Manrope({
   subsets: ['latin', 'latin-ext'],
 })
 
-const lilita = Lilita_One({
-  variable: '--font-lilita',
+const archivoBlack = Archivo_Black({
+  variable: '--font-archivo-black',
   weight: '400',
   subsets: ['latin', 'latin-ext'],
 })
@@ -28,12 +28,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="fi"
-      className={`${manrope.variable} ${lilita.variable} ${geistMono.variable}`}
+      className={`${manrope.variable} ${archivoBlack.variable} ${geistMono.variable}`}
     >
       <body className="flex min-h-screen flex-col bg-paper text-ink antialiased">
         <header className="border-b-2 border-team-line bg-chalk">
           <nav className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
-            <Link href="/" className="font-display text-lg text-team-deep">
+            <Link
+              href="/"
+              className="whitespace-nowrap font-display text-sm text-team-deep sm:text-base"
+            >
               <span aria-hidden="true">⚽ </span>
               HJK United 2026-2027
             </Link>
