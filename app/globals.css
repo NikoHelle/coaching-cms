@@ -22,7 +22,7 @@
   --color-cone-tint: oklch(0.955 0.02 60);
   --color-clay: oklch(0.48 0.1 25);
   --color-clay-tint: oklch(0.95 0.016 25);
-  --font-display: var(--font-lilita);
+  --font-display: var(--font-archivo-black);
   --shadow-card: 0 1px 2px oklch(0.3 0.03 255 / 0.05), 0 3px 10px oklch(0.3 0.03 255 / 0.07);
   --shadow-lift: 0 2px 4px oklch(0.3 0.03 255 / 0.07), 0 10px 24px oklch(0.3 0.03 255 / 0.11);
 }
