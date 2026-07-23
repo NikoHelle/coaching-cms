@@ -12,7 +12,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
 
-type Item = { drill_id: string; note: string; video_indexes: number[] | null }
+type Item = { drill_id: string; note: string; visible_videos: string[] | null }
 type PickerDrill = Pick<Drill, 'id' | 'title' | 'duration_minutes' | 'status' | 'video_urls'>
 
 export function SessionForm({
@@ -32,7 +32,7 @@ export function SessionForm({
     session?.items.map((i) => ({
       drill_id: i.drill.id,
       note: i.note ?? '',
-      video_indexes: i.video_indexes,
+      visible_videos: i.visible_videos,
     })) ?? []
   )
   const [search, setSearch] = useState('')
@@ -56,17 +56,17 @@ export function SessionForm({
     setItems(next)
   }
 
-  function toggleVideo(itemIndex: number, videoIndex: number, videoCount: number) {
+  function toggleVideo(itemIndex: number, url: string, allUrls: string[]) {
     setItems((prev) =>
       prev.map((item, i) => {
         if (i !== itemIndex) return item
-        const current = item.video_indexes ?? Array.from({ length: videoCount }, (_, v) => v)
-        const next = current.includes(videoIndex)
-          ? current.filter((v) => v !== videoIndex)
-          : [...current, videoIndex].sort((a, b) => a - b)
+        const current = item.visible_videos ?? allUrls
+        const next = current.includes(url)
+          ? current.filter((u) => u !== url)
+          : allUrls.filter((u) => current.includes(u) || u === url)
         // All checked = no restriction, so videos added to the drill later
         // show automatically.
-        return { ...item, video_indexes: next.length === videoCount ? null : next }
+        return { ...item, visible_videos: next.length === allUrls.length ? null : next }
       })
     )
   }
@@ -198,15 +198,15 @@ export function SessionForm({
                 {drill && drill.video_urls.length > 0 && (
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
                     <span className="font-medium text-neutral-500">Videos shown:</span>
-                    {drill.video_urls.map((_, vi) => {
+                    {drill.video_urls.map((url, vi) => {
                       const checked =
-                        item.video_indexes === null || item.video_indexes.includes(vi)
+                        item.visible_videos === null || item.visible_videos.includes(url)
                       return (
-                        <label key={vi} className="flex items-center gap-1">
+                        <label key={`${vi}-${url}`} className="flex items-center gap-1">
                           <input
                             type="checkbox"
                             checked={checked}
-                            onChange={() => toggleVideo(index, vi, drill.video_urls.length)}
+                            onChange={() => toggleVideo(index, url, drill.video_urls)}
                           />
                           Variaatio {vi + 1}
                         </label>
@@ -233,7 +233,7 @@ export function SessionForm({
                     type="button"
                     className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-neutral-100"
                     onClick={() => {
-                      setItems([...items, { drill_id: drill.id, note: '', video_indexes: null }])
+                      setItems([...items, { drill_id: drill.id, note: '', visible_videos: null }])
                       setSearch('')
                     }}
                   >
